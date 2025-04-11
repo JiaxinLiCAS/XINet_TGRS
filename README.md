@@ -26,62 +26,56 @@ Our paper is accepted by IEEE Transactions on Geoscience and Remote Sensing (TGR
 ### checkpoints
 这个文件夹用于储存训练中的所有结果，这里给出了TG数据的示例。如果你直接运行main.py,将会在`TG_SF12_endnum130_fl0.8_blo3_A100_B100_C10_E0.01__use_ATV1_CMMIYes_blindYes`文件夹中生成以下的这些文件
 
-This folder is used to store the results and a folder named `TGSF12_band240_S1_0.001_2000_2000_S2_0.004_2000_2000_S3_0.004_7000_7000` is given as an example.
+This folder is used to store the results and a folder named `TG_SF12_endnum130_fl0.8_blo3_A100_B100_C10_E0.01__use_ATV1_CMMIYes_blindYes` is given as an example.
 
-- `BlindNet.pth` is the trained parameters of Stage One. 第一阶段网络训练好的参数
+- `BlindNet.pth` is the trained parameters of the degradation model. 因为本方法是盲融合，因此需要估计未知的PSF和SRF
 
-- `estimated_lr_msi.mat` is the estimated LrMSI in Stage One. 第一阶段估计到的LrMSI
-
-- `estimated_psf_srf.mat` is the estimated PSF and SRF. 第一阶段估计到的PSF和SRF
-
-- `gt_lr_msi.mat` is the gt lr_msi. LrMSI的真值
+- `estimated_psf_srf.mat` is the estimated PSF and SRF. 估计到的PSF和SRF
 
 - `hr_msi.mat` and `lr_hsi.mat`  are simulated results as the input of our method. 由输入的TG数据仿真得到的LrHSI和HrMSI
 
 - `opt.txt` is the configuration of our method. 存储本次实验的所有配置，包括超参数以及数据名称等，由model里的config.py决定
-  
-- `Out_fhsi_S2.mat` and `Out_fhsi_S3.mat` is the estimated HrHSI from S2 and S3 in the stream of lrhsi. 由hsi分支在第二和第三阶段生成的HrHSI估计结果
-
-- `Out_fmsi_S2.mat` and `Out_fmsi_S3.mat` is the estimated HrHSI from S2 and S3 in the stream of hrmsi. 由msi分支在第二和第三阶段生成的HrHSI估计结果
 
 - `psf_gt.mat` and  `srf_gt.mat` are the GT PSF and SRF. PSF 和 SRF的真值
 
-- `srf_Out_S4.mat` is the final estimation of our method. 本方法最终估计的结果
+- `Out.mat` is the final estimation. 本方法最终重建结果
 
-- `Stage1.txt` is the training accuracy of Stage One.第1阶段的精度
+- `loss_log.txt` is the training loss in the training process. 记录训练过程的损失变化
 
-- `Stage2.txt` is the training accuracy of Stage Two.第2阶段的精度
+- `precision.txt` is the training accuracy in the training process. 记录训练过程的精度变化
   
-- `Stage3.txt` is the training accuracy of Stage Three.第3阶段的精度
-
-- `Stage4.txt` is the training accuracy of Stage Four.第4阶段的精度
+- `psnr_and_sam.pickle` is the psnr and sam accuracy in the training process. 保存训练过程的PSNR 和 SAM
   
 ### data
 This folder is used to store the ground true HSI and corresponding spectral response of multispectral imager, aiming to generate the simulated inputs. The TianGong-1 HSI data and spectral response of WorldView 2 multispectral imager are given as an example here.
 
-这里给出了一个示例。EDIP-Net文件里的TG文件夹是TG数据的真值，spectral_response是用来仿真HrMSI的光谱响应函数。
+这里给出了一个示例。XINet文件里的TG文件夹是TG数据的真值，spectral_response是用来仿真HrMSI的光谱响应函数。
 
 ### model
-This folder consists of ten .py files, including 
+This folder consists of six .py files, including 
 - `__init__.py`
 
 - `config.py`: all the hyper-parameters can be adjusted here. 本方法所有需要调整的参数，包含数据读取地址以及模型超参数等
 
-- `dip.py`: the stage three. 对应第三阶段
-
 - `evaluation.py`: to evaluate the metrics. 评价指标计算
 
-- `network_s2.py`: the network used in the Stage Two. 阶段二所需要的网络模型
-
-- `network_s3.py`: the network used in the Stage Three. 阶段三所需要的网络模型
+- `network.py`: the network used in our model. 本方法使用到的网络模块
 
 - `read_data.py`: read and simulate data. 读取数据和仿真数据
 
-- `select.py`: generate the final result from Stage three. 对阶段三的两个输出进行融合
+- `fusion.py`: XINet. 重建融合主网络
 
-- `spectral_up.py`: the network in the Stage Two. 对应阶段二
+- `srf_psf_layer.py`: the network to estimate PSF and SRF. 用于估计PSF和SRF，作为XINet的输入
 
-- `srf_psf_layer.py`: the network in the Stage One. 对应阶段一
+### utils
+This folder consists of four .py files, including 
+- `__init__.py`
+
+- `evaluation.py`: to evaluate the metrics. 评价指标计算
+
+- `util.py`: some tools. 一些工具函数
+
+- ❗`visualizer.py`: to display the training results. 用于可视化训练中的结果，基于Visdom可视化包  
 
 ### main
 - `main.py`: main.py 运行该文件，生成目标图像
@@ -91,16 +85,39 @@ This folder consists of ten .py files, including
 
 - Parameters: all the parameters need fine-tunning can be found in `config.py`. 本方法所有需要调整的参数都在此.py中
 
-- Data: put your HSI data and MSI spectral reponse in `./data/EDIP-Net/TG` and `./data/EDIP-Net/spectral_response`, respectively. The TianGong-1 HSI data and spectral response of WorldView 2 multispectral imager are given as an example here.
+- Data: put your HSI data and MSI spectral response in `./data/XINet/TG` and `./data/XINet/spectral_response`, respectively. The TianGong-1 HSI data and spectral response of WorldView 2 multispectral imager are given as an example here.
 
   将你的高光谱数据以及用于仿真HrMSI的光谱响应放到对应文件夹中，这里用TG数据作为示例
 
+- You should download the Visdom via pip or conda, and then type 'visdom -port 8500' into the terminal (the number should be identical to the --display_port in the model/config.py. Last, you can enter the site(http://localhost:8500/) the terminal give to you)
+
+  因为本方法使用了Visdom可视化包实现对训练过程的可视化，因此Vidsom包的安装是必备过程。以下将简单介绍Visdom包的安装和使用：
+
+  1.在你所在环境中 使用 conda/pip install visdom，完成对工具包的安装。具体过程可见[此](https://cloud.tencent.com/developer/article/2053918)
+  
+  2.安装成功后，同时按下WIN+R，输入CMD进入终端，在你所在环境的终端里输入 visdom -port 8500 (注意：后面的数字可以随意，但需要跟model/config.py里面的--display_port参数保持一致)。
+
+  此时，终端会提示你进入 http://localhost:8500/ 网址，复制该地址进入浏览器。这个网站后续就会可视化训练的过程。
+
+  更多关于Visdom可视化方法可见[此](https://blog.csdn.net/2401_88244350/article/details/143364300)
+  
 - Run: just simply run `main.py` after adjusting the parameters in `config.py`.
   在对应文件夹放置你的数据后，调整 `config.py`后的参数，即可运行`main.py`
 
-- Results: one folder named `TGSF12_band260_S1_0.001_3000_3000_S2_0.004_2000_2000_S3_0.004_7000_7000` will be generated once `main.py` is run and all the results will be stored in the new folder.
-  当你运行本代码后，将会生成` TGSF12_band260_S1_0.001_3000_3000_S2_0.004_2000_2000_S3_0.004_7000_7000` 文件夹，里面存储所有结果
+- Results: one folder named `TG_SF12_endnum130_fl0.8_blo3_A100_B100_C10_E0.01__use_ATV1_CMMIYes_blindYes` will be generated once `main.py` is run and all the results will be stored in the new folder. Also, you can observe the training process in the above-opened site via Visdom.
+  当你运行本代码后，将会生成`TG_SF12_endnum130_fl0.8_blo3_A100_B100_C10_E0.01__use_ATV1_CMMIYes_blindYes` 文件夹，里面存储所有结果.
 
+  同时，你可以在刚才打开的网站里实时监控整个训练过程,如下图所见.
+
+  1.左上角代表每个损失随着训练的变化过程。左下角分别是学习率的变化以及PSNR-SAM的变化。
+  
+  2.中间可视化6张图。第一列分别是LrHSI HrMSI HrHSI真值，右侧分别代表自编码器重建出来的结果。
+  
+  3.右侧两张图。上方lrhsi真值以及自编码重建出来的lrhsi在相同位置的光谱曲线，下方代表HrHSI以及重建HrHSI在相同位置的光谱曲线。注意：在每轮可视化的时候，选取的像素位置都会变化。
+
+<img src="./Imgs/fig3.png" width="2000px"/>
+
+**Fig.3.** Visdom visualization.
 
 ## 如何联系我们 Contact
 遇到任何问题，包括但不限于代码调试、数据仿真、运行结果等，随时添加
