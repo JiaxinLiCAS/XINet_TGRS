@@ -119,7 +119,10 @@ This folder consists of four .py files, including
   
 5. Run: just simply run `main.py` after adjusting the parameters in `config.py`.
   在对应文件夹放置你的数据后，调整 `config.py`后的参数，即可运行`main.py`
-6. Results: one folder named `TG_SF12_endnum130_fl0.8_blo3_A100_B100_C10_E0.01__use_ATV1_CMMIYes_blindYes` will be generated once `main.py` is run and all the results will be stored in the new folder. Also, you can observe the training process in the above-opened site via Visdom.
+
+  **当你觉得效果欠佳时，可以调整里面的 -endmember_num 个数。**
+   
+7. Results: one folder named `TG_SF12_endnum130_fl0.8_blo3_A100_B100_C10_E0.01__use_ATV1_CMMIYes_blindYes` will be generated once `main.py` is run and all the results will be stored in the new folder. Also, you can observe the training process in the above-opened site via Visdom.
   当你运行本代码后，将会生成`TG_SF12_endnum130_fl0.8_blo3_A100_B100_C10_E0.01__use_ATV1_CMMIYes_blindYes` 文件夹，里面存储所有结果.
 
   同时，你可以在刚才打开的网站里实时监控整个训练过程,如下图所见.
