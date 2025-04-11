@@ -110,13 +110,5 @@ def MetricsCal(x_true,x_pred, scale):# c,w,h
 
 
 if __name__ == "__main__":
-    data_path_true=r"E:\Code\coupled\data\Houston18\REF.mat"
-    data_path_pred=r"E:\Code\coupled\checkpoints\所有方法结果汇总\Houston_10\MIAE_Out.mat"
-    #data_path_pred=r"E:\Code\深度非监督\HyperFusion_tidy\HyperFusionGAN\checkpoints\Whisper_SF8_sigma3.3972872661180045_lr0.001_nums100_niter5000_decay5000_A1.0_B10_C10.0_D0.01_E0.01_F100.0\Out.mat"
-    x_true=io.loadmat(data_path_true)['REF']
-    x_pred=io.loadmat(data_path_pred)['Out'] #Out rec_hhsi
-    '''Whisper=8 Houston18=10 Chikusei=16'''
-    scale=10
-    sam,psnr,ergas,cc,rmse,Ssim,Uqi=MetricsCal(x_true,x_pred, scale)
-    print("sam {},psnr {},ergas {},cc {},rmse {},Ssim {},Uqi {}".format(sam,psnr,ergas,cc,rmse,Ssim,Uqi))
+    pass
     
