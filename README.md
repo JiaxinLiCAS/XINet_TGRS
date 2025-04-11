@@ -4,10 +4,11 @@ X-Shaped Interactive Autoencoders With Cross-Modality Mutual Learning for Unsupe
 # $\color{red}{欢迎添加 我的微信(WeChat): BatAug，欢迎交流与合作}$
 
 ## 本人还提出了其余多个开源的高光谱-多光谱超分融合代码，可移步至[GitHub主页下载](https://github.com/JiaxinLiCAS) 
+🖼️遇到任何问题，包括但不限于代码调试、数据仿真、运行结果等，随时添加
+$\color{red}{我的微信(WeChat): BatAug，欢迎交流与合作}$
 
-[Jiaxin Li](https://www.researchgate.net/profile/Li-Jiaxin-20), [Ke Zheng](https://www.researchgate.net/profile/Ke-Zheng-9), [Zhi Li](https://ieeexplore.ieee.org/author/37085683916),  [Lianru Gao](https://scholar.google.com/citations?hl=en&user=f6OnhtcAAAAJ), and [Xiuping Jia](https://scholar.google.com/citations?user=-vl0ZSEAAAAJ&hl=zh-CN)
+[Jiaxin Li](https://www.researchgate.net/profile/Li-Jiaxin-20), [Ke Zheng](https://www.researchgate.net/profile/Ke-Zheng-9), [Zhi Li](https://ieeexplore.ieee.org/author/37085683916),  [Lianru Gao](https://scholar.google.com/citations?hl=en&user=f6OnhtcAAAAJ), and [Xiuping Jia](https://scholar.google.com/citations?user=-vl0ZSEAAAAJ&hl=zh-CN)，IEEE Transactions on Geoscience and Remote Sensing (TGRS). 
 
-Our paper is accepted by IEEE Transactions on Geoscience and Remote Sensing (TGRS). 
 
 文章可在这里下载🖼️[**PDF**](./Imgs/XINet.pdf)，The final version can be downloaded in  🖼️[**PDF**](./Imgs/XINet.pdf) 
 
