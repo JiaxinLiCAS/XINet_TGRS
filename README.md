@@ -1,4 +1,4 @@
-# XINet
+# XINet_TGRS
 X-Shaped Interactive Autoencoders With Cross-Modality Mutual Learning for Unsupervised Hyperspectral Image Super-Resolution, TGRS. (PyTorch)
 
 [Jiaxin Li 李嘉鑫](https://www.researchgate.net/profile/Li-Jiaxin-20), [Ke Zheng 郑珂](https://www.researchgate.net/profile/Ke-Zheng-9), [Zhi Li 李智](https://ieeexplore.ieee.org/author/37085683916),  [Lianru Gao 高连如](https://scholar.google.com/citations?hl=en&user=f6OnhtcAAAAJ), and [Xiuping Jia 贾秀萍](https://scholar.google.com/citations?user=-vl0ZSEAAAAJ&hl=zh-CN)，IEEE Transactions on Geoscience and Remote Sensing (TGRS). 
